@@ -1,9 +1,8 @@
 using FileManagement.API.Infrastructure.Middlewares;
+using FileManagement.Application;
 using FileManagement.Core.Interfaces.Infastructure;
-using FileManagement.Core.Interfaces.Services;
 using FileManagement.Data.AppContext;
 using FileManagement.Data.Infastructure;
-using FileManagement.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -39,9 +38,11 @@ namespace FileManagement.WebAPI
 
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 
-            services.AddScoped<IFileService, FileService>();
+            services.AddApplication();
 
-            services.AddAutoMapper(typeof(AutoMapperProfile));
+           // services.AddScoped<IFileService, FileService>();
+
+            //services.AddAutoMapper(typeof(AutoMapperProfile));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

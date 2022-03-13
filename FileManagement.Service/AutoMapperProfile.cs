@@ -1,20 +1,20 @@
-﻿using AutoMapper;
-using FileManagement.Core.Dtos;
-using FileManagement.Data.Entities;
+﻿//using AutoMapper;
+//using FileManagement.Application.Dtos;
+//using FileManagement.Data.Entities;
 
-namespace FileManagement
-{
-    public class AutoMapperProfile : Profile
-    {
-        public AutoMapperProfile()
-        {
-            CreateMap<FileDataInfo, FileDto>()
-                .ForMember(dest => dest.ReferenceNumber, opt => opt.MapFrom(src => src.Id))
-                .ReverseMap();
+//namespace FileManagement
+//{
+//    public class AutoMapperProfile : Profile
+//    {
+//        public AutoMapperProfile()
+//        {
+//            CreateMap<FileDataInfo, FileDto>()
+//                .ForMember(dest => dest.ReferenceNumber, opt => opt.MapFrom(src => src.Id))
+//                .ReverseMap();
 
-            CreateMap<FileDataInfo, CreateFileDto>().ReverseMap();
+//            CreateMap<FileDataInfo, CreateFileDto>().ReverseMap();
 
-        }
+//        }
 
-    }
-}
+//    }
+//}
