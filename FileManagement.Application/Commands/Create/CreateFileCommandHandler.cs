@@ -28,7 +28,7 @@ namespace FileManagement.Application.Commands
         }
         public async Task<Guid> Handle(CreateFileCommand request, CancellationToken cancellationToken)
         {
-            var isvalid =new CreateFileCommandValidator().Validate(request);
+            
             var shardFolderPath = _configuration.GetSection("FolderPath").Value;
 
             string uniqueFileName = GetUniqueFileName(request.FormFile.FileName);

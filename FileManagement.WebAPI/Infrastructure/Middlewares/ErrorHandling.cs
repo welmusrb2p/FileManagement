@@ -1,6 +1,8 @@
 ﻿
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Linq;
 using System.Net;
@@ -29,7 +31,8 @@ namespace FileManagement.API.Infrastructure.Middlewares
 
                 context.Response.ContentType = "application/json";
 
-                await context.Response.WriteAsync(ex.Failures.ToString());
+                await context.Response.WriteAsync(SerializeObject(ex.Failures));
+
             }
             catch (Exception ex)
             {
@@ -47,6 +50,15 @@ namespace FileManagement.API.Infrastructure.Middlewares
            
             await context.Response.WriteAsync("Error Occurred. Please, check the logs");
 
+        }
+        private string SerializeObject(object obj)
+        {
+            var jsonSerializerSettings = new JsonSerializerSettings
+            {
+                ContractResolver = new CamelCasePropertyNamesContractResolver()
+            };
+
+            return JsonConvert.SerializeObject(obj, jsonSerializerSettings);
         }
     }
 }

@@ -62,7 +62,7 @@ namespace FileManagement.WebAPI
 
             app.UseMiddleware(typeof(ErrorHandling));
 
-            //app.UseMiddleware(typeof(AuthorizationTokenMiddleware));
+            app.UseMiddleware(typeof(AuthorizationTokenMiddleware));
 
             app.UseEndpoints(endpoints =>
             {

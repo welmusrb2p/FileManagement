@@ -6,26 +6,20 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
+using ValidationException = FileManagement.Core.Exceptions.ValidationException;
 
 namespace FileManagement.API.Controllers
 {
     public class FileManagementController : BaseController
     {
-        //private readonly IFileService _fileService;
-        //public FileManagementController(IFileService fileService)
-        //{
-        //    _fileService = fileService;
-        //}
 
         [HttpGet("GetFile")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        
         public async Task<IActionResult> GetFile(Guid referenceNumber)
         {
-            //var result = await _fileService.GetFileInfo(referenceNumber);
-            //return Ok(result);
-
             return Ok(await Mediator.Send(new GetFileQuery { ReferenceNumber=referenceNumber}));
 
         }
@@ -46,6 +40,7 @@ namespace FileManagement.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesDefaultResponseType]
         public async Task<IActionResult> AddFile(IFormFile formFile)
         {
             return Ok(await Mediator.Send(new CreateFileCommand() { FormFile = formFile }));
