@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -17,13 +18,12 @@ namespace FileManagement.Core.Behaviours
         {
             _validators = validators;
         }
-
         public Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
         {
             var context = new ValidationContext(request);
 
             var failures = _validators
-                .Select(v => v.Validate(context))
+                .Select(v => v.Validate(request))
                 .SelectMany(result => result.Errors)
                 .Where(f => f != null)
                 .ToList();

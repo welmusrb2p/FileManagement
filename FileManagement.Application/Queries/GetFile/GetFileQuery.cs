@@ -1,4 +1,4 @@
-﻿using FileManagement.Application.Dtos;
+﻿using FileManagement.Application.Queries.GetFile;
 using MediatR;
 using System;
 

@@ -68,30 +68,30 @@
 
 //        public async Task<Guid> AddFile(CreateFileDto  createFileDto)
 //        {
-//            var shardFolderPath = _configuration.GetSection("FolderPath").Value;
+    //            var shardFolderPath = _configuration.GetSection("FolderPath").Value;
 
-//            string uniqueFileName = GetUniqueFileName(createFileDto.formFile.FileName);
+    //            string uniqueFileName = GetUniqueFileName(createFileDto.formFile.FileName);
 
-//            string filePath = Path.Combine(shardFolderPath, uniqueFileName);
+    //            string filePath = Path.Combine(shardFolderPath, uniqueFileName);
 
-//            using (Stream fileStream = new FileStream(filePath, FileMode.Create))
-//            {
-//                await createFileDto.formFile.CopyToAsync(fileStream);
-//            }
+    //            using (Stream fileStream = new FileStream(filePath, FileMode.Create))
+    //            {
+    //                await createFileDto.formFile.CopyToAsync(fileStream);
+    //            }
 
-//            var fileDataInfo = new FileDataInfo
-//            {
-//                FileName = createFileDto.formFile.FileName,
-//                ContentType = createFileDto.formFile.ContentType,
-//                FileSize = (int)createFileDto.formFile.Length / 1024,
-//                Path = filePath
-//            };
+    //            var fileDataInfo = new FileDataInfo
+    //            {
+    //                FileName = createFileDto.formFile.FileName,
+    //                ContentType = createFileDto.formFile.ContentType,
+    //                FileSize = (int)createFileDto.formFile.Length / 1024,
+    //                Path = filePath
+    //            };
 
-//            var result = await _fileDataRepo.Add(fileDataInfo);
+    //            var result = await _fileDataRepo.Add(fileDataInfo);
 
-//            await _unitOfWork.CommitAsync();
+    //            await _unitOfWork.CommitAsync();
 
-//            return result.Id;
+    //            return result.Id;
 //        }
 //        private string GetUniqueFileName(string fileName)
 //        {

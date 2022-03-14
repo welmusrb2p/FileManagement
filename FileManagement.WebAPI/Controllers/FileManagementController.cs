@@ -1,4 +1,7 @@
-﻿using FileManagement.Application.Queries;
+﻿using FileManagement.Application.Commands;
+using FileManagement.Application.Commands.Delete;
+using FileManagement.Application.Queries;
+using FileManagement.Application.Queries.GetFileContent;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -27,51 +30,39 @@ namespace FileManagement.API.Controllers
 
         }
 
-        //[HttpGet("GetFileContent")]
-        //[ProducesResponseType(StatusCodes.Status200OK)]
-        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
-        //[ProducesResponseType(StatusCodes.Status404NotFound)]
-        //public async Task<IActionResult> GetFileContent(Guid referenceNumber)
-        //{
-        //    var result = await _fileService.GetFileContent(referenceNumber);
+        [HttpGet("GetFileContent")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetFileContent(Guid referenceNumber)
+        {
+            return Ok(await Mediator.Send(new GetFileContentQuery { ReferenceNumber= referenceNumber }));
+        }
 
-        //    return Ok(result);
+
+
+        [HttpPost("AddFile")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public async Task<IActionResult> AddFile(IFormFile formFile)
+        {
+            return Ok(await Mediator.Send(new CreateFileCommand() { FormFile = formFile }));
+        }
+
+        //public async Task<IActionResult> AddFile(CreateFileCommand createFileCommand)
+        //{
+        //    return Ok(await Mediator.Send(createFileCommand));
         //}
 
-        //[HttpGet("GetFileContentByPath")]
-        //[ProducesResponseType(StatusCodes.Status200OK)]
-        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
-        //[ProducesResponseType(StatusCodes.Status404NotFound)]
-        //public async Task<IActionResult> GetFileContentByPath(string path)
-        //{
-        //    var result = await _fileService.GetFileContent(path);
-
-        //    return Ok(result);
-        //}
-
-
-        //[HttpPost("AddFile")]
-        //[ProducesResponseType(StatusCodes.Status200OK)]
-        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
-        //[ProducesResponseType(StatusCodes.Status404NotFound)]
-        //[ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        //[ModelValidationAttribute]
-        //public async Task<IActionResult> AddFile(CreateFileDto createFileDto)
-        //{
-        //        var result = await _fileService.AddFile(createFileDto);
-
-        //    return Ok( new {Reference_Number = result });
-        //}
-
-        //[HttpDelete("DeleteFile")]
-        //[ProducesResponseType(StatusCodes.Status200OK)]
-        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
-        //[ProducesResponseType(StatusCodes.Status404NotFound)]
-        //public async Task<IActionResult> DeleteFile(Guid referenceNumber)
-        //{
-        //    var result = await _fileService.DeleteFile(referenceNumber);
-
-        //    return Ok(result);
-        //}
+        [HttpDelete("DeleteFile")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> DeleteFile(Guid referenceNumber)
+        {
+            return Ok(await Mediator.Send(new DeleteFileCommand { ReferenceNumber=referenceNumber}));
+        }
     }
 }

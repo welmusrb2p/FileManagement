@@ -3,7 +3,7 @@ using FileManagement.Application.Mappings;
 using FileManagement.Data.Entities;
 using System;
 
-namespace FileManagement.Application.Dtos
+namespace FileManagement.Application.Queries.GetFile
 {
     public class FileDto :IMapFrom<FileDataInfo>
     {
@@ -11,7 +11,6 @@ namespace FileManagement.Application.Dtos
         public string FileName { get; set; }
         public int FileSize { get; set; }
         public string ContentType { get; set; }
-        public string Path { get; set; }
 
         public void Mapping(Profile profile)
         {

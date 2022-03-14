@@ -40,9 +40,6 @@ namespace FileManagement.WebAPI
 
             services.AddApplication();
 
-           // services.AddScoped<IFileService, FileService>();
-
-            //services.AddAutoMapper(typeof(AutoMapperProfile));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,7 +48,9 @@ namespace FileManagement.WebAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
                 app.UseSwagger();
+
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "FileManagement.WebAPI v1"));
             }
 
@@ -63,7 +62,7 @@ namespace FileManagement.WebAPI
 
             app.UseMiddleware(typeof(ErrorHandling));
 
-            app.UseMiddleware(typeof(AuthorizationTokenMiddleware));
+            //app.UseMiddleware(typeof(AuthorizationTokenMiddleware));
 
             app.UseEndpoints(endpoints =>
             {

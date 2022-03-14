@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using FileManagement.Application.Dtos;
+using FileManagement.Application.Queries.GetFile;
 using FileManagement.Core.Interfaces.Infastructure;
 using FileManagement.Data.Entities;
 using MediatR;
